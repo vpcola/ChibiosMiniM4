@@ -72,6 +72,8 @@ CHIBIOS = ../..
 BOARDDIR = ./boards
 GFXLIB = ./ugfx
 GUIAPP = ./gui
+SHELLAPP = ./shell
+I2CDEVICES = ./i2cdevices
 
 include $(BOARDDIR)/MIKROE_MINI_M4/board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
@@ -86,6 +88,8 @@ include $(GFXLIB)/gfx.mk
 include $(GFXLIB)/drivers/gdisp/ILI9341/driver.mk
 include $(GFXLIB)/drivers/ginput/touch/ADS7843/driver.mk
 include $(GUIAPP)/guiapp.mk
+include $(SHELLAPP)/shellapps.mk
+include $(I2CDEVICES)/i2cdevices.mk
 
 
 
@@ -102,7 +106,7 @@ CSRC = $(PORTSRC) \
        $(PLATFORMSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/various/shell.c \
-	   $(CHIBIOS)/os/various/chprintf.c \
+       $(CHIBIOS)/os/various/chprintf.c \
        $(CHIBIOS)/os/various/memstreams.c \
        $(FATFSSRC) \
        $(GFXSRC) \
@@ -113,6 +117,8 @@ CSRC = $(PORTSRC) \
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CPPSRC = $(CHCPPSRC) \
+	 	$(SHELLAPPSRC) \
+	 	$(I2CDEVICESSRC) \
          main.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
@@ -144,6 +150,8 @@ INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(FATFSINC) \
          $(GFXINC) \
          $(GUIAPPINC) \
+	 	 $(SHELLAPPINC) \
+	 	 $(I2CDEVICESINC) \
          $(CHIBIOS)/os/various
 
 
